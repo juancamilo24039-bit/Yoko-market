@@ -1,0 +1,947 @@
+/* ==========================================================
+   1. TIPOGRAFÍA
+   Cargamos Inter desde archivos locales para acercarnos a Figma.
+   Si falta la fuente, el navegador utilizará Arial.
+   ========================================================== */
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================
+   2. BASE
+   Quitamos márgenes predeterminados y unificamos las medidas.
+   El fondo crema y el texto oscuro corresponden al diseño.
+   ========================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: #241f1c;
+  background-color: #fdf6ec;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+select {
+  font: inherit;
+}
+
+img {
+  display: block;
+}
+
+/* Permite reconocer qué elemento está seleccionado con teclado. */
+a:focus-visible,
+button:focus-visible,
+select:focus-visible {
+  outline: 2px solid #241f1c;
+  outline-offset: 4px;
+}
+
+/* Oculta texto visualmente, pero lo mantiene para lectores de pantalla.
+   Se usa en el h1 y en las etiquetas de los filtros. */
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================
+   3. ENCABEZADO
+   En escritorio: categorías a la izquierda e iconos a la derecha.
+   min-height permite crecer si el contenido necesita más espacio.
+   ========================================================== */
+
+.encabezado {
+  border: 1px solid #e7dcc8;
+}
+
+.encabezado-interior {
+  width: 100%;
+  max-width: 1212px;
+  min-height: 62px;
+  margin: 0 auto;
+  padding: 16px 31px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.lista-categorias {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.lista-categorias a {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.lista-categorias .enlace-sale {
+  color: #e5372b;
+  font-weight: 500;
+}
+
+.lista-categorias a:hover {
+  text-decoration: underline;
+}
+
+/* Conservamos el tamaño natural del grupo exportado de Figma. */
+.acciones-header {
+  flex-shrink: 0;
+}
+
+/* El botón del menú se utiliza únicamente en pantallas pequeñas. */
+.boton-menu {
+  display: none;
+}
+
+/* ==========================================================
+   4. CONTENEDOR PRINCIPAL
+   En la referencia: 1212 px totales y 12 px a cada lado.
+   A mayor ancho, el contenido queda centrado.
+   ========================================================== */
+
+.contenido {
+  width: 100%;
+  max-width: 1212px;
+  margin: 0 auto;
+  padding: 33px 12px 56px;
+}
+
+/* ==========================================================
+   5. BANNER
+   La imagen se coloca sobre una base azul.
+   background-size reproduce el recorte del fondo de Figma.
+   ========================================================== */
+
+.banner {
+  position: relative;
+  isolation: isolate;
+  min-height: 241px;
+  padding: 33px 16px 19px;
+  overflow: hidden;
+  border-radius: 12px;
+  text-align: center;
+  background-color: rgba(34, 102, 201, 0.95);
+}
+
+/* Esta capa contiene solamente la imagen de fondo.
+   Su opacidad no afecta al título, personajes ni botón. */
+.banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.6;
+  background-image: url("../assets/images/sayonara-fondo.png");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center 19.51%;
+}
+
+.banner h2 {
+  max-width: 354px;
+  margin: 0 auto;
+  color: #fdf6ec;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 34px;
+}
+
+/* Figma organiza los dos personajes alrededor del botón. */
+.banner-contenido {
+  min-height: 126px;
+  margin-top: 29px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Ventana que recorta la imagen original del personaje. */
+.personaje {
+  position: relative;
+  flex-shrink: 0;
+  width: 130px;
+  height: 164px;
+  overflow: hidden;
+}
+
+.personaje img {
+  position: absolute;
+  width: 172.41%;
+  height: 136.36%;
+  max-width: none;
+  left: -39.08%;
+  top: -18.18%;
+}
+
+/* Reutilizamos la misma imagen reflejándola horizontalmente. */
+.personaje-espejo {
+  transform: scaleX(-1);
+}
+
+.boton-coleccion {
+  display: inline-block;
+  flex-shrink: 0;
+  padding: 10px 24px;
+  border-radius: 8px;
+  background-color: #00a652;
+  color: #241f1c;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 29px;
+}
+
+.boton-coleccion:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   6. FILTROS
+   Flexbox permite que los controles pasen a otra fila
+   cuando no hay espacio suficiente.
+   ========================================================== */
+
+.filtros {
+  margin-top: 20px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.filtros select {
+  max-width: 100%;
+  min-height: 32px;
+  padding: 6px 12px;
+  border: 1px solid #e7dcc8;
+  border-radius: 20px;
+  background-color: #fdf6ec;
+  color: #241f1c;
+  font-size: 13px;
+  line-height: 18px;
+  cursor: pointer;
+}
+
+/* ==========================================================
+   7. PRODUCTOS DESTACADOS
+   En escritorio hay cinco columnas de 220 px con espacios de 20 px.
+   Se conserva el espacio libre a la derecha que aparece en Figma.
+   ========================================================== */
+
+.destacados {
+  margin-top: 34px;
+}
+
+.destacados > h2 {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.lista-productos {
+  display: grid;
+  grid-template-columns: repeat(5, 220px);
+  gap: 20px;
+}
+
+/* Cada tarjeta mantiene juntos imagen, nombre y precio. */
+.tarjeta-producto {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #e7dcc8;
+  border-radius: 12px;
+  background-color: #fdf6ec;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* La imagen llena una superficie cuadrada.
+   object-fit evita deformarla cuando cambia el ancho de la tarjeta. */
+.tarjeta-producto img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.tarjeta-producto h3 {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+.precio {
+  color: #b37d00;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19px;
+}
+
+/* ==========================================================
+   8. FOOTER
+   Su fondo ocupa todo el ancho; el contenido interior se centra.
+   Flexbox separa la marca de los enlaces.
+   ========================================================== */
+
+.pie-pagina {
+  background-color: #00a652;
+  color: #fdf6ec;
+}
+
+.pie-interior {
+  max-width: 1212px;
+  margin: 0 auto;
+  padding: 32px 32px 24px;
+}
+
+.pie-fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.marca {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.enlaces-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.enlaces-footer a:hover {
+  text-decoration: underline;
+}
+
+.copyright {
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+/* Los contenidos adicionales están ocultos inicialmente.
+   :target muestra la sección cuyo id aparece al final de la URL. */
+.informacion-footer {
+  display: none;
+  margin-top: 24px;
+}
+
+.informacion-footer:target {
+  display: block;
+}
+
+.informacion-footer h2 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.informacion-footer p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ==========================================================
+   9. ESCRITORIO ESTRECHO
+   Antes de que cinco tarjetas desborden, pasamos a tres columnas.
+   minmax permite que cada columna se adapte al espacio disponible.
+   ========================================================== */
+
+@media (max-width: 1199px) {
+  .lista-productos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ==========================================================
+   10. TABLET Y CELULAR
+   Aparece el botón del menú, las categorías se despliegan debajo
+   y los productos pasan a dos columnas.
+   ========================================================== */
+
+@media (max-width: 768px) {
+  .encabezado-interior {
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .boton-menu {
+    display: block;
+    padding: 8px 12px;
+    border: 1px solid #e7dcc8;
+    border-radius: 4px;
+    color: #241f1c;
+    background-color: #fdf6ec;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  /* Colocamos la navegación después del botón y los iconos. */
+  .navegacion {
+    display: none;
+    order: 3;
+    width: 100%;
+  }
+
+  /* main.js añade o elimina esta clase al pulsar el botón. */
+  .navegacion.abierta {
+    display: block;
+  }
+
+  .lista-categorias {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .lista-categorias a {
+    padding: 12px 0;
+  }
+
+  .acciones-header {
+    margin-left: auto;
+  }
+
+  .contenido {
+    padding: 24px 16px 40px;
+  }
+
+  .banner {
+    padding-top: 24px;
+  }
+
+  .banner h2 {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .banner-contenido {
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+  .personaje {
+    width: 90px;
+    height: 114px;
+  }
+
+  .boton-coleccion {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .lista-productos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .pie-interior {
+    padding: 24px 16px;
+  }
+}
+
+/* ==========================================================
+   11. CELULARES PEQUEÑOS
+   Reducimos los personajes para evitar que el banner desborde.
+   Las tarjetas conservan dos columnas a un ancho de 390 px.
+   ========================================================== */
+
+@media (max-width: 480px) {
+  .banner {
+    min-height: 220px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .banner h2 {
+    max-width: 280px;
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .banner-contenido {
+    gap: 8px;
+  }
+
+  .personaje {
+    width: 55px;
+    height: 70px;
+  }
+
+  .boton-coleccion {
+    padding: 10px 12px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .destacados > h2 {
+    font-size: 18px;
+  }
+
+  .lista-productos {
+    gap: 12px;
+  }
+
+  .tarjeta-producto {
+    padding: 10px;
+  }
+
+  .tarjeta-producto h3 {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .pie-fila {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+/* En pantallas muy estrechas dejamos una sola tarjeta por fila. */
+@media (max-width: 359px) {
+  .lista-productos {
+    grid-template-columns: 1fr;
+  }
+
+  .personaje {
+    width: 40px;
+    height: 51px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================
+   CATÁLOGO: VISIBILIDAD DE LAS VARIANTES
+   Garantizamos que hidden oculte una sección incluso cuando
+   otra regla le asigne display: flex o display: grid.
+   ========================================================== */
+
+.pagina-catalogo [hidden] {
+  display: none;
+}
+
+/* ==========================================================
+   ENCABEZADO DEL CATÁLOGO
+   Reutiliza la base de la homepage.
+   La categoría actual recibe la pastilla verde de Figma.
+   ========================================================== */
+
+.marca-catalogo {
+  flex-shrink: 0;
+  font-size: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.pagina-catalogo .lista-categorias a.activa {
+  padding: 8px 20px;
+  border-radius: 20px;
+  background-color: #00a652;
+  font-weight: 500;
+}
+
+/* ==========================================================
+   CONTENEDOR
+   Evitamos alturas fijas: la página crece con sus productos.
+   El ancho máximo conserva la escala de la referencia.
+   ========================================================== */
+
+.catalogo-contenido {
+  width: 100%;
+  max-width: 1212px;
+  margin: 0 auto;
+  padding: 26px 18px 40px;
+}
+
+/* Ropa tiene un margen lateral de 32 px en Figma. */
+.pagina-catalogo.es-ropa .catalogo-contenido {
+  padding-right: 32px;
+  padding-left: 32px;
+}
+
+/* ==========================================================
+   SELECTOR HOMBRE / MUJER
+   Quitamos el borde original del fieldset.
+   :checked identifica el radio seleccionado.
+   ========================================================== */
+
+.selector-genero {
+  display: flex;
+  gap: 12px;
+  margin: 0 0 18px;
+  padding: 0;
+  border: 0;
+}
+
+.selector-genero label {
+  padding: 8px 20px;
+  border: 1px solid #e7dcc8;
+  border-radius: 20px;
+  font-size: 13px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+/* El signo + selecciona el label que sigue al input. */
+.selector-genero input:checked + label {
+  background-color: #2266c9;
+  border-color: #2266c9;
+  color: #fdf6ec;
+}
+
+/* El foco se dibuja en la etiqueta visible del radio. */
+.selector-genero input:focus-visible + label {
+  outline: 2px solid #241f1c;
+  outline-offset: 4px;
+}
+
+/* ==========================================================
+   CARDS DE ESTILOS
+   Cuatro columnas con fotografías, capa oscura y título.
+   El recorte mantiene la proporción de 260 × 300 de Figma.
+   ========================================================== */
+
+.estilos-ropa {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 260px));
+  gap: 20px;
+}
+
+.card-estilo {
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 260 / 300;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background-color: #e7dcc8;
+  color: #fdf6ec;
+  cursor: pointer;
+}
+
+.card-estilo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* La capa oscura facilita leer el título sobre la fotografía. */
+.card-estilo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(36, 31, 28, 0.55);
+  z-index: -1;
+}
+
+.card-estilo span {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* ==========================================================
+   BANNER DE PELUCHES
+   Texto a la izquierda y una tarjeta a la derecha.
+   El tamaño puede crecer para evitar recortar contenido.
+   ========================================================== */
+
+.banner-peluches {
+  min-height: 342px;
+  margin-top: 4px;
+  padding: 34px 32px;
+  border-radius: 12px;
+  background-color: #f4b400;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 130px;
+}
+
+.texto-peluches h2 {
+  margin-bottom: 80px;
+  color: #fdf6ec;
+  font-size: 64px;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.producto-banner {
+  flex-shrink: 0;
+  width: 220px;
+}
+
+/* ==========================================================
+   BANNER SALE
+   Tres elementos en fila: personaje, texto y personaje.
+   Las imágenes mantienen su proporción.
+   ========================================================== */
+
+.banner-sale {
+  min-height: 192px;
+  padding: 10px 24px;
+  border-radius: 12px;
+  background-color: #e5372b;
+  color: #fdf6ec;
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+
+.banner-sale img {
+  width: 130px;
+  height: 172px;
+  object-fit: contain;
+}
+
+.banner-sale h2 {
+  margin-bottom: 8px;
+  font-size: 36px;
+  font-weight: 500;
+}
+
+.banner-sale p {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ==========================================================
+   FILTROS Y PRODUCTOS
+   Reutilizamos las tarjetas y la grilla de la homepage.
+   Solo cambiamos los espacios verticales del catálogo.
+   ========================================================== */
+
+.filtros-catalogo {
+  margin-top: 26px;
+  margin-bottom: 25px;
+}
+
+.productos-catalogo {
+  row-gap: 37px;
+}
+
+/* En ropa, cinco columnas se ajustan al ancho disponible
+   para evitar el desbordamiento del frame original de Figma. */
+.pagina-catalogo.es-ropa .productos-catalogo {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.aviso-catalogo {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.aviso-catalogo:not(:empty) {
+  margin-bottom: 16px;
+}
+
+/* ==========================================================
+   ESCRITORIO ESTRECHO
+   Tres productos por fila y menos separación en peluches.
+   ========================================================== */
+
+@media (max-width: 1199px) {
+  .pagina-catalogo .productos-catalogo {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .banner-peluches {
+    gap: 48px;
+  }
+
+  .texto-peluches h2 {
+    font-size: 48px;
+  }
+}
+
+/* La marca pasa a una fila propia antes de que el header desborde. */
+@media (min-width: 769px) and (max-width: 1000px) {
+  .pagina-catalogo .encabezado-interior {
+    flex-wrap: wrap;
+  }
+
+  .marca-catalogo {
+    order: -1;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ==========================================================
+   TABLET Y CELULAR
+   Reutilizamos el menú responsive de la homepage.
+   Cards de ropa y productos pasan a dos columnas.
+   ========================================================== */
+
+@media (max-width: 768px) {
+  .pagina-catalogo .catalogo-contenido {
+    padding: 24px 16px 40px;
+  }
+
+  .marca-catalogo {
+    font-size: 14px;
+  }
+
+  .pagina-catalogo .encabezado-interior {
+    gap: 12px;
+  }
+
+  .estilos-ropa {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .card-estilo span {
+    font-size: 24px;
+  }
+
+  .banner-peluches {
+    flex-direction: column;
+    gap: 24px;
+    padding: 28px 20px;
+    text-align: center;
+  }
+
+  .texto-peluches h2 {
+    margin-bottom: 24px;
+    font-size: 38px;
+  }
+
+  .banner-sale {
+    gap: 12px;
+    padding: 20px 12px;
+  }
+
+  .banner-sale img {
+    width: 70px;
+    height: 100px;
+  }
+
+  .banner-sale h2 {
+    font-size: 28px;
+  }
+
+  .banner-sale p {
+    font-size: 13px;
+  }
+
+  .pagina-catalogo .productos-catalogo {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+/* En celular pequeño, la marca ocupa una fila independiente. */
+@media (max-width: 480px) {
+  .marca-catalogo {
+    order: -1;
+    width: 100%;
+    text-align: center;
+  }
+
+  .card-estilo span {
+    font-size: 20px;
+  }
+
+  .pagina-catalogo .productos-catalogo {
+    gap: 12px;
+  }
+
+  .banner-sale img {
+    width: 50px;
+    height: 80px;
+  }
+}
+
+/* En pantallas muy estrechas, un producto por fila. */
+@media (max-width: 359px) {
+  .pagina-catalogo .productos-catalogo {
+    grid-template-columns: 1fr;
+  }
+}

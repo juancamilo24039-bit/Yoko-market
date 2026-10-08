@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Codificación para mostrar correctamente tildes y símbolos. -->
+  <meta charset="UTF-8">
+
+  <!-- Hace que el ancho de la página corresponda al dispositivo. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>YokoMarket | Inicio</title>
+
+  <!-- index.html está en la raíz y los estilos están dentro de src. -->
+  <link rel="stylesheet" href="src/css/style.css">
+
+  <!-- Conservamos la interacción del menú que ya construimos.
+       defer espera a que el navegador haya leído el HTML. -->
+  <script src="src/js/main.js" defer></script>
+</head>
+
+<body>
+  <!-- Encabezado compartido: navegación e iconos del diseño.
+       El contenido interior se centra en pantallas grandes. -->
+  <header class="encabezado">
+    <div class="encabezado-interior">
+
+      <!-- En celular, este botón abre y cierra las categorías.
+           Los identificadores coinciden con nuestro main.js. -->
+      <button
+        class="boton-menu"
+        id="boton-menu"
+        type="button"
+        aria-controls="navegacion"
+        aria-expanded="false"
+      >
+        Abrir menú
+      </button>
+
+      <!-- Los enlaces utilizan el catálogo compartido.
+           La categoría se indica mediante el parámetro de la URL. -->
+      <nav
+        class="navegacion"
+        id="navegacion"
+        aria-label="Categorías de productos"
+      >
+        <ul class="lista-categorias">
+          <li>
+            <a href="src/pages/catalogo.html?categoria=ropa">Ropa</a>
+          </li>
+          <li>
+            <a href="src/pages/catalogo.html?categoria=peluches">
+              Peluches
+            </a>
+          </li>
+          <li>
+            <a href="src/pages/catalogo.html?categoria=vinilos">
+              CDs/Vinilos
+            </a>
+          </li>
+          <li>
+            <a href="src/pages/catalogo.html?categoria=bolsos">
+              Bolsos
+            </a>
+          </li>
+          <li>
+            <a href="src/pages/catalogo.html?categoria=accesorios">
+              Accesorios
+            </a>
+          </li>
+          <li>
+            <a
+              class="enlace-sale"
+              href="src/pages/catalogo.html?ofertas=true"
+            >
+              Sale
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Exportación visual del grupo de iconos de Figma.
+           En esta fase es una imagen, no cuatro controles funcionales.
+           Más adelante los separaremos para añadir sus interacciones. -->
+      <img
+        class="acciones-header"
+        src="src/assets/icons/acciones-header.svg"
+        alt="Favoritos, búsqueda, bolsa de compras y perfil"
+        width="132"
+        height="24"
+      >
+    </div>
+  </header>
+
+  <main class="contenido">
+    <!-- Título principal accesible.
+         Se oculta visualmente porque Figma no muestra este título por fuera del banner, pero conserva la jerarquía del documento. -->
+    <h1 class="solo-lectores">YokoMarket: tienda de merch y coleccionables</h1>
+
+    <!-- Banner de la colección.
+         El fondo se aplica desde CSS; los personajes son decorativos.
+         El enlace central conduce al catálogo de la colección. -->
+    <section class="banner" aria-labelledby="titulo-coleccion">
+      <h2 id="titulo-coleccion">Nueva colección Sayonara</h2>
+
+      <div class="banner-contenido">
+        <div class="personaje">
+          <img
+            src="src/assets/images/coco-banner.png"
+            alt=""
+          >
+        </div>
+
+        <a
+          class="boton-coleccion"
+          href="src/pages/catalogo.html?coleccion=sayonara"
+        >
+          Ver colección
+        </a>
+
+        <div class="personaje personaje-espejo">
+          <img
+            src="src/assets/images/coco-banner.png"
+            alt=""
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Filtros con controles HTML nativos.
+         Se pueden desplegar y seleccionar sin JavaScript.
+         Filtrar los productos se implementará después con el DOM. -->
+    <form class="filtros" aria-label="Filtros de productos">
+      <label class="solo-lectores" for="categoria">Categoría</label>
+      <select id="categoria" name="categoria">
+        <option value="">Categoría</option>
+        <option value="ropa">Ropa</option>
+        <option value="peluches">Peluches</option>
+        <option value="vinilos">CDs/Vinilos</option>
+        <option value="bolsos">Bolsos</option>
+        <option value="accesorios">Accesorios</option>
+      </select>
+
+      <label class="solo-lectores" for="ubicacion">Ubicación</label>
+      <select id="ubicacion" name="ubicacion">
+        <option value="">Ubicación</option>
+        <option value="colombia">Colombia</option>
+        <option value="puerto-rico">Puerto Rico</option>
+      </select>
+
+      <label class="solo-lectores" for="precio">Precio</label>
+      <select id="precio" name="precio">
+        <option value="">Precio</option>
+        <option value="menor">Menor a mayor</option>
+        <option value="mayor">Mayor a menor</option>
+      </select>
+
+      <label class="solo-lectores" for="estado">Estado</label>
+      <select id="estado" name="estado">
+        <option value="">Estado</option>
+        <option value="nuevo">Nuevo</option>
+        <option value="usado">Usado</option>
+      </select>
+    </form>
+
+    <!-- Sección de productos: cada article representa un producto.
+         Figma repite el mismo llavero cinco veces; conservamos eso.
+         Luego podremos generar estas tarjetas con datos y JavaScript. -->
+    <section class="destacados" aria-labelledby="titulo-productos">
+      <h2 id="titulo-productos">Productos destacados</h2>
+
+      <div class="lista-productos">
+        <!-- Tarjeta 1: imagen, nombre y precio. -->
+        <article class="tarjeta-producto">
+          <img
+            src="src/assets/images/llavero-coco.png"
+            alt="Llavero Coco con forma de cocodrilo"
+            width="196"
+            height="196"
+          >
+          <h3>Llavero Coco cocodrilo</h3>
+          <p class="precio">$35.000</p>
+        </article>
+
+        <!-- Tarjeta 2: comparte exactamente los mismos estilos. -->
+        <article class="tarjeta-producto">
+          <img
+            src="src/assets/images/llavero-coco.png"
+            alt="Llavero Coco con forma de cocodrilo"
+            width="196"
+            height="196"
+          >
+          <h3>Llavero Coco cocodrilo</h3>
+          <p class="precio">$35.000</p>
+        </article>
+
+        <!-- Tarjeta 3: no requiere un CSS diferente. -->
+        <article class="tarjeta-producto">
+          <img
+            src="src/assets/images/llavero-coco.png"
+            alt="Llavero Coco con forma de cocodrilo"
+            width="196"
+            height="196"
+          >
+          <h3>Llavero Coco cocodrilo</h3>
+          <p class="precio">$35.000</p>
+        </article>
+
+        <!-- Tarjeta 4: conserva la estructura semántica del producto. -->
+        <article class="tarjeta-producto">
+          <img
+            src="src/assets/images/llavero-coco.png"
+            alt="Llavero Coco con forma de cocodrilo"
+            width="196"
+            height="196"
+          >
+          <h3>Llavero Coco cocodrilo</h3>
+          <p class="precio">$35.000</p>
+        </article>
+
+        <!-- Tarjeta 5: completa la fila del diseño de escritorio. -->
+        <article class="tarjeta-producto">
+          <img
+            src="src/assets/images/llavero-coco.png"
+            alt="Llavero Coco con forma de cocodrilo"
+            width="196"
+            height="196"
+          >
+          <h3>Llavero Coco cocodrilo</h3>
+          <p class="precio">$35.000</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer: identidad de marca, información y derechos.
+       Usamos details para que estos enlaces tengan un destino
+       dentro de esta misma homepage, sin crear páginas adicionales. -->
+  <footer class="pie-pagina">
+    <div class="pie-interior">
+      <div class="pie-fila">
+        <p class="marca">YOKOMARKET</p>
+
+        <nav aria-label="Información del sitio">
+          <ul class="enlaces-footer">
+            <li><a href="#ayuda">Ayuda</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#terminos">Términos</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <p class="copyright">© 2026 YokoMarket</p>
+
+      <!-- Información provisional del prototipo académico.
+           Solo aparece al seleccionar alguno de los enlaces. -->
+      <section class="informacion-footer" id="ayuda">
+        <h2>Ayuda</h2>
+        <p>Explora las categorías para encontrar tus productos.</p>
+      </section>
+
+      <section class="informacion-footer" id="contacto">
+        <h2>Contacto</h2>
+        <p>La información de contacto se añadirá en una siguiente fase.</p>
+      </section>
+
+      <section class="informacion-footer" id="terminos">
+        <h2>Términos</h2>
+        <p>Este sitio es un prototipo académico. No procesa compras reales.</p>
+      </section>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Configuración básica para tildes y adaptación a dispositivos. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Catálogo | YokoMarket</title>
+
+  <!-- Desde pages, ../ permite subir a src y encontrar css y js. -->
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/main.js" defer></script>
+  <script src="../js/catalogo.js" defer></script>
+</head>
+
+<body class="pagina-catalogo">
+  <!-- Reutilizamos el encabezado y la interacción del menú.
+       Añadimos el nombre de la marca que aparece en los catálogos. -->
+  <header class="encabezado">
+    <div class="encabezado-interior">
+      <button
+        class="boton-menu"
+        id="boton-menu"
+        type="button"
+        aria-controls="navegacion"
+        aria-expanded="false"
+      >
+        Abrir menú
+      </button>
+
+      <nav
+        class="navegacion"
+        id="navegacion"
+        aria-label="Categorías de productos"
+      >
+        <ul class="lista-categorias">
+          <!-- data-categoria permite identificar cada enlace desde JS. -->
+          <li>
+            <a href="catalogo.html?categoria=ropa" data-categoria="ropa">
+              Ropa
+            </a>
+          </li>
+          <li>
+            <a
+              href="catalogo.html?categoria=peluches"
+              data-categoria="peluches"
+            >
+              Peluches
+            </a>
+          </li>
+          <li>
+            <a
+              href="catalogo.html?categoria=vinilos"
+              data-categoria="vinilos"
+            >
+              CDs/Vinilos
+            </a>
+          </li>
+          <li>
+            <a href="catalogo.html?categoria=bolsos" data-categoria="bolsos">
+              Bolsos
+            </a>
+          </li>
+          <li>
+            <a
+              href="catalogo.html?categoria=accesorios"
+              data-categoria="accesorios"
+            >
+              Accesorios
+            </a>
+          </li>
+          <li>
+            <a
+              class="enlace-sale"
+              href="catalogo.html?ofertas=true"
+              data-categoria="sale"
+            >
+              Sale
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Desde esta página necesitamos subir dos carpetas
+           para encontrar index.html en la raíz del proyecto. -->
+      <a class="marca-catalogo" href="../../index.html">YOKOMARKET</a>
+
+      <!-- Conservamos la exportación visual del encabezado.
+           Los iconos aún no son controles independientes. -->
+      <img
+        class="acciones-header"
+        src="../assets/icons/acciones-header.svg"
+        alt="Favoritos, búsqueda, bolsa de compras y perfil"
+        width="132"
+        height="24"
+      >
+    </div>
+  </header>
+
+  <main class="catalogo-contenido">
+    <!-- El título cambia según la categoría.
+         No aparece visualmente para respetar la referencia de Figma. -->
+    <h1 class="solo-lectores" id="titulo-catalogo">Catálogo</h1>
+
+    <!-- VARIANTE ROPA.
+         hidden la mantiene oculta hasta que JavaScript la active. -->
+    <section
+      id="seccion-ropa"
+      aria-label="Explorar estilos de ropa"
+      hidden
+    >
+      <!-- Radio buttons: permiten elegir una sola opción.
+           Los labels se estilizan como las pastillas de Figma. -->
+      <fieldset class="selector-genero">
+        <legend class="solo-lectores">Sección de ropa</legend>
+
+        <input
+          class="solo-lectores"
+          type="radio"
+          name="genero"
+          id="hombre"
+          value="hombre"
+          checked
+        >
+        <label for="hombre">Hombre</label>
+
+        <input
+          class="solo-lectores"
+          type="radio"
+          name="genero"
+          id="mujer"
+          value="mujer"
+        >
+        <label for="mujer">Mujer</label>
+      </fieldset>
+
+      <!-- Cada card funciona como botón para seleccionar
+           una subcategoría en el filtro de abajo. -->
+      <div class="estilos-ropa">
+        <button class="card-estilo" type="button" data-estilo="oversize">
+          <img src="../assets/images/ropa-oversize.png" alt="">
+          <span>Oversize</span>
+        </button>
+
+        <button class="card-estilo" type="button" data-estilo="baggy">
+          <img src="../assets/images/ropa-baggy.png" alt="">
+          <span>Baggy</span>
+        </button>
+
+        <button class="card-estilo" type="button" data-estilo="graficos">
+          <img src="../assets/images/ropa-graficos.png" alt="">
+          <span>Gráficos</span>
+        </button>
+
+        <button class="card-estilo" type="button" data-estilo="basicos">
+          <img src="../assets/images/ropa-basicos.png" alt="">
+          <span>Básicos</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- VARIANTE PELUCHES.
+         Banner amarillo con texto, botón y producto destacado. -->
+    <section
+      class="banner-peluches"
+      id="banner-peluches"
+      aria-labelledby="titulo-peluches"
+      hidden
+    >
+      <div class="texto-peluches">
+        <h2 id="titulo-peluches">Peluche favorito</h2>
+        <a class="boton-coleccion" href="#productos">Compra a Coco</a>
+      </div>
+
+      <article class="tarjeta-producto producto-banner">
+        <img
+          src="../assets/images/llavero-coco.png"
+          alt="Llavero Coco con forma de cocodrilo"
+          width="196"
+          height="196"
+        >
+        <h3>Llavero Coco cocodrilo</h3>
+        <p class="precio">$35.000</p>
+      </article>
+    </section>
+
+    <!-- VARIANTE SALE.
+         Reutilizamos un personaje a ambos lados del texto,
+         reflejando el segundo mediante CSS. -->
+    <section
+      class="banner-sale"
+      id="banner-sale"
+      aria-labelledby="titulo-sale"
+      hidden
+    >
+      <img src="../assets/images/coco-sale.png" alt="">
+
+      <div>
+        <h2 id="titulo-sale">SALE</h2>
+        <p>Descuentos exclusivos para fans</p>
+      </div>
+
+      <img
+        class="personaje-espejo"
+        src="../assets/images/coco-sale.png"
+        alt=""
+      >
+    </section>
+
+    <!-- FILTROS COMPARTIDOS.
+         JavaScript cambia las opciones de categoría para ropa.
+         Los otros controles son visuales en esta primera versión. -->
+    <form class="filtros filtros-catalogo" aria-label="Filtros del catálogo">
+      <label class="solo-lectores" for="filtro-categoria">Categoría</label>
+      <select id="filtro-categoria" name="categoria">
+        <option value="">Categoría</option>
+      </select>
+
+      <label class="solo-lectores" for="filtro-ubicacion">Ubicación</label>
+      <select id="filtro-ubicacion" name="ubicacion">
+        <option value="">Ubicación</option>
+        <option value="colombia">Colombia</option>
+        <option value="puerto-rico">Puerto Rico</option>
+      </select>
+
+      <label class="solo-lectores" for="filtro-precio">Precio</label>
+      <select id="filtro-precio" name="precio">
+        <option value="">Precio</option>
+        <option value="menor">Menor a mayor</option>
+        <option value="mayor">Mayor a menor</option>
+      </select>
+
+      <label class="solo-lectores" for="filtro-estado">Estado</label>
+      <select id="filtro-estado" name="estado">
+        <option value="">Estado</option>
+        <option value="nuevo">Nuevo</option>
+        <option value="usado">Usado</option>
+      </select>
+    </form>
+
+    <!-- Productos compartidos.
+         JavaScript crea las diez tarjetas repetidas de Figma
+         para no escribir diez veces el mismo HTML. -->
+    <section id="productos" aria-labelledby="titulo-productos">
+      <h2 class="solo-lectores" id="titulo-productos">
+        Productos del catálogo
+      </h2>
+
+      <p class="aviso-catalogo" id="aviso-catalogo" aria-live="polite"></p>
+
+      <div class="lista-productos productos-catalogo" id="lista-productos">
+      </div>
+
+      <!-- Si JavaScript está desactivado, explicamos el contenido vacío. -->
+      <noscript>
+        Activa JavaScript para mostrar los productos y las variantes.
+      </noscript>
+    </section>
+  </main>
+</body>
+</html>
